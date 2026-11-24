@@ -1,7 +1,7 @@
 import type { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class AddTodoDueDate1795181018754857586 implements MigrationInterface {
-  name = 'AddTodoDueDate1795181018754857586';
+export class AddTodoDueDate1795181018754 implements MigrationInterface {
+  name = 'AddTodoDueDate1795181018754';
 
   async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`

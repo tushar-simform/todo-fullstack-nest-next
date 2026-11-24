@@ -5,8 +5,8 @@ import type { MigrationInterface, QueryRunner } from 'typeorm';
  * for now: existing rows are adopted by `npm run seed`; a later migration
  * should make it NOT NULL once every row has an owner.
  */
-export class AddUsers1795184470219692820 implements MigrationInterface {
-  name = 'AddUsers1795184470219692820';
+export class AddUsers1795184470219 implements MigrationInterface {
+  name = 'AddUsers1795184470219';
 
   async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`

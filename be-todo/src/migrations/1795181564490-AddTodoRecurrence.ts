@@ -1,7 +1,7 @@
 import type { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class AddTodoRecurrence1795181564490923667 implements MigrationInterface {
-  name = 'AddTodoRecurrence1795181564490923667';
+export class AddTodoRecurrence1795181564490 implements MigrationInterface {
+  name = 'AddTodoRecurrence1795181564490';
 
   async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
