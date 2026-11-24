@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { ROUTES } from "@/constants";
+import { ABOUT_COPY, ROUTES } from "@/constants";
 import { cn } from "@/lib/cn";
 import { HeaderActions } from "./header-actions";
 import { Logo } from "./logo";
@@ -19,6 +19,14 @@ export function Header({ size = "narrow" }: HeaderProps) {
         <Link href={ROUTES.home} aria-label="Home" className="rounded-lg focus-visible:outline-2 focus-visible:outline-primary">
           <Logo />
         </Link>
+        <nav className="ml-auto mr-3 sm:mr-4">
+          <Link
+            href={ROUTES.about}
+            className="rounded-lg px-2 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-primary"
+          >
+            {ABOUT_COPY.navLabel}
+          </Link>
+        </nav>
         {/* Reads the session cookie, so it streams in; the placeholder keeps the layout stable. */}
         <Suspense fallback={<div className="h-9 w-20" />}>
           <HeaderActions />

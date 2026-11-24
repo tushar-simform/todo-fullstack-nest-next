@@ -1,3 +1,4 @@
+export * from "./about.constants";
 export * from "./app.constants";
 export * from "./auth.constants";
 export * from "./landing.constants";

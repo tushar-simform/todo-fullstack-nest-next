@@ -1,6 +1,7 @@
 export const ROUTES = {
   home: "/",
   login: "/login",
+  about: "/about",
   today: "/today",
   all: "/all",
   due: "/due",
@@ -19,4 +20,4 @@ export const API_PATHS = {
 } as const;
 
 /** Reachable without signing in. Everything else is protected by `proxy.ts`. */
-export const PUBLIC_ROUTES: string[] = [ROUTES.home, ROUTES.login];
+export const PUBLIC_ROUTES: string[] = [ROUTES.home, ROUTES.login, ROUTES.about];
