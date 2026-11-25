@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { LOGIN_NEXT_PARAM, PUBLIC_ROUTES, ROUTES, SESSION_COOKIE_NAME } from "@/constants";
 import { isJwtExpired } from "@/lib/auth/jwt";
+import { sessionExpiredPath } from "@/lib/auth/redirect";
 
 /**
  * Optimistic auth gate: anything that is not a public route needs an unexpired
@@ -13,6 +14,9 @@ export function proxy(request: NextRequest) {
 
   const token = request.cookies.get(SESSION_COOKIE_NAME)?.value;
   if (token && !isJwtExpired(token)) return NextResponse.next();
+
+  // A cookie that has run out means the session expired: say so (the route clears the cookie).
+  if (token) return NextResponse.redirect(new URL(sessionExpiredPath(`${pathname}${search}`), request.url));
 
   const login = new URL(ROUTES.login, request.url);
   login.searchParams.set(LOGIN_NEXT_PARAM, `${pathname}${search}`);

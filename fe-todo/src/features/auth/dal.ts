@@ -5,6 +5,7 @@ import { connection } from "next/server";
 import { API_PATHS, ROUTES } from "@/constants";
 import { API_URL } from "@/lib/api/config";
 import { isJwtExpired } from "@/lib/auth/jwt";
+import { sessionExpiredPath } from "@/lib/auth/redirect";
 import { getToken } from "@/lib/auth/session";
 import type { AuthUser } from "./types";
 
@@ -26,9 +27,12 @@ export const getCurrentUser = cache(async (): Promise<AuthUser | null> => {
   }
 });
 
-/** For protected pages: returns the user or redirects to /login. */
+/**
+ * For protected pages: returns the user or redirects to /login (with a
+ * "session expired" toast when there was a session cookie that no longer works).
+ */
 export async function requireUser(): Promise<AuthUser> {
   const user = await getCurrentUser();
-  if (!user) redirect(ROUTES.login);
+  if (!user) redirect((await getToken()) ? sessionExpiredPath() : ROUTES.login);
   return user;
 }

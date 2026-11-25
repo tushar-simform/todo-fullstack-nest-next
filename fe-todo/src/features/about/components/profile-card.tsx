@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { MailIcon } from "@/components/ui/icons";
-import { ABOUT_COPY, ABOUT_STACK } from "@/constants";
+import { ABOUT_COPY, ABOUT_VALUES } from "@/constants";
 import portrait from "@/assets/tushar-mahajan.webp";
 
-/** Photo, name, email and the stack this app is built with. */
+/** Photo, name, email and the values behind the app. */
 export function ProfileCard() {
   return (
     <Card className="animate-fade-up mx-auto flex w-full max-w-xl flex-col items-center gap-6 p-6 text-center sm:p-10">
@@ -39,9 +39,9 @@ export function ProfileCard() {
       <div className="w-full border-t border-border pt-5">
         <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">{ABOUT_COPY.stackHeading}</h2>
         <ul className="mt-3 flex flex-wrap justify-center gap-2">
-          {ABOUT_STACK.map((tech) => (
-            <li key={tech} className="whitespace-nowrap rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium">
-              {tech}
+          {ABOUT_VALUES.map((value) => (
+            <li key={value} className="whitespace-nowrap rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium">
+              {value}
             </li>
           ))}
         </ul>

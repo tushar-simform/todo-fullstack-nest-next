@@ -5,4 +5,7 @@ export const TODO_MESSAGES = {
 
 export const AUTH_MESSAGES = {
   invalidCredentials: 'Invalid email or password',
+  invalidCode: 'Invalid or expired code',
+  emailNotVerified: 'Verify your email to continue',
+  emailTaken: 'An account with this email already exists',
 } as const;

@@ -20,7 +20,7 @@ export function ProfileMenuLink() {
         active ? "border-primary text-foreground" : "border-border text-muted",
       )}
     >
-      <span className="grid size-8 place-items-center rounded-full bg-gradient-to-br from-primary to-accent text-white">
+      <span className="grid size-8 place-items-center rounded-full bg-gradient-to-br from-primary to-accent text-primary-foreground">
         <UserIcon />
       </span>
       <SettingsIcon className="transition-transform duration-500 group-hover:rotate-90" />

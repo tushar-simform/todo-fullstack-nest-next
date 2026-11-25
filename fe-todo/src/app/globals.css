@@ -5,35 +5,36 @@
 
 :root {
   color-scheme: light;
-  --background: #f5f6fb;
+  /* Brand palette, from the logo: deep navy ink, teal, and the blue of its gradient. */
+  --background: #f1f7f8;
   --surface: #ffffff;
-  --surface-muted: #eef0f8;
-  --border: #e3e6f2;
-  --foreground: #0f1222;
-  --muted: #667089;
-  --primary: #6366f1;
-  --primary-strong: #4f46e5;
+  --surface-muted: #e8f1f3;
+  --border: #d9e6ea;
+  --foreground: #0f1b2d;
+  --muted: #5a6b7f;
+  --primary: #0a7d79;
+  --primary-strong: #086460;
   --primary-foreground: #ffffff;
-  --accent: #ec4899;
-  --success: #10b981;
+  --accent: #1c78c8;
+  --success: #16a34a;
   --danger: #ef4444;
   --warning: #d97706;
-  --shadow: 0 1px 2px rgb(15 18 34 / 0.04), 0 8px 24px -8px rgb(79 70 229 / 0.12);
+  --shadow: 0 1px 2px rgb(15 27 45 / 0.04), 0 8px 24px -8px rgb(10 125 121 / 0.16);
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --background: #0a0c16;
-  --surface: #131628;
-  --surface-muted: #1b1f36;
-  --border: #262b47;
-  --foreground: #eef0ff;
-  --muted: #8f96b5;
-  --primary: #818cf8;
-  --primary-strong: #6366f1;
-  --primary-foreground: #0a0c16;
-  --accent: #f472b6;
-  --success: #34d399;
+  --background: #08121f;
+  --surface: #0f1d2e;
+  --surface-muted: #162739;
+  --border: #223650;
+  --foreground: #e8f1f6;
+  --muted: #8da2b5;
+  --primary: #34d1c1;
+  --primary-strong: #19b5a8;
+  --primary-foreground: #06141f;
+  --accent: #4aa8f0;
+  --success: #4ade80;
   --danger: #f87171;
   --warning: #fbbf24;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 28px -8px rgb(0 0 0 / 0.6);

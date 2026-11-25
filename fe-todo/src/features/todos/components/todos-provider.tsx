@@ -48,7 +48,7 @@ export function TodosProvider({ todos, children }: { todos: Todo[]; children: Re
         onClick={editor.openCreate}
         aria-label="New todo"
         title="New todo"
-        className="fixed bottom-[max(1.5rem,env(safe-area-inset-bottom))] right-[max(1.5rem,env(safe-area-inset-right))] z-30 grid size-14 place-items-center rounded-full bg-gradient-to-br from-primary to-accent text-2xl text-white shadow-lg shadow-primary/40 transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className="fixed bottom-[max(1.5rem,env(safe-area-inset-bottom))] right-[max(1.5rem,env(safe-area-inset-right))] z-30 grid size-14 place-items-center rounded-full bg-gradient-to-br from-primary to-accent text-2xl text-primary-foreground shadow-lg shadow-primary/40 transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         <PlusIcon strokeWidth={2.5} />
       </button>

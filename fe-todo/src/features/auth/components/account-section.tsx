@@ -11,7 +11,7 @@ export async function AccountSection() {
   return (
     <Card className="animate-fade-up mb-4 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex min-w-0 items-center gap-4">
-        <span className="grid size-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary to-accent text-2xl text-white">
+        <span className="grid size-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-primary to-accent text-2xl text-primary-foreground">
           <UserIcon />
         </span>
         <div className="min-w-0">

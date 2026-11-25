@@ -22,6 +22,10 @@ export class User {
   @Column({ name: 'password_hash', type: 'text' })
   passwordHash: string;
 
+  /** Set once the owner proves the address with an emailed code. Null = can't log in. */
+  @Column({ name: 'email_verified_at', type: 'timestamptz', nullable: true })
+  emailVerifiedAt: Date | null;
+
   @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })
   createdAt: Date;
 

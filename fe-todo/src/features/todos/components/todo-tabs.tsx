@@ -30,10 +30,10 @@ export function TodoTabs() {
               href={href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "relative flex items-center justify-center gap-2 whitespace-nowrap rounded-lg px-1 py-2.5 text-xs font-medium transition-all duration-200 sm:px-3.5 sm:py-2 sm:text-sm",
+                "flex items-center justify-center gap-1.5 whitespace-nowrap rounded-lg px-1 py-2.5 text-xs font-medium transition-all duration-200 sm:px-3.5 sm:py-2 sm:text-sm",
                 "focus-visible:outline-2 focus-visible:outline-primary active:scale-95",
                 active
-                  ? "bg-gradient-to-br from-primary to-accent text-white shadow-md shadow-primary/30"
+                  ? "bg-gradient-to-br from-primary to-accent text-primary-foreground shadow-md shadow-primary/30"
                   : "text-muted hover:bg-surface-muted hover:text-foreground",
               )}
             >
@@ -41,9 +41,9 @@ export function TodoTabs() {
               {count > 0 && (
                 <span
                   className={cn(
-                    "animate-pop absolute -right-0.5 -top-1 min-w-4 rounded-full px-1 text-center text-[10px] leading-4 tabular-nums sm:static sm:min-w-5 sm:px-1.5 sm:text-xs sm:leading-normal",
+                    "animate-pop hidden min-w-5 rounded-full px-1.5 text-center text-xs tabular-nums sm:inline",
                     active
-                      ? "bg-white/25 text-white"
+                      ? "bg-primary-foreground/20 text-primary-foreground"
                       : view === "due"
                         ? "bg-danger/15 text-danger"
                         : "bg-surface-muted text-muted",

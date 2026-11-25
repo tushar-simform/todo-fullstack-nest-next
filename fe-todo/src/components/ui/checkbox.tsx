@@ -22,7 +22,7 @@ export function Checkbox({ checked, onChange, label, disabled }: CheckboxProps) 
         "grid size-6 shrink-0 place-items-center rounded-full border-2 transition-all duration-300",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:scale-90",
         checked
-          ? "border-transparent bg-gradient-to-br from-primary to-accent text-white"
+          ? "border-transparent bg-gradient-to-br from-primary to-accent text-primary-foreground"
           : "border-border hover:border-primary",
       )}
     >

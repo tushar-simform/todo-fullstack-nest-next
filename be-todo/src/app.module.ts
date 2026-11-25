@@ -1,19 +1,17 @@
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MailModule, LogMailTransport, SmtpTransport } from '@nestjs/mail';
 import { createObserveModule } from '@nestjs/observe';
 import { AuthenticationModule } from '@nestjs/authentication';
-import { ThrottlerGuard, ThrottlerModule, minutes } from '@nestjs/throttler';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { envSchema, type Env } from './config/env.schema.js';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { AuthModule } from './auth/auth.module.js';
-import {
-  JWT_AUDIENCE,
-  JWT_ISSUER,
-  THROTTLE_DEFAULT_LIMIT,
-} from './constants/index.js';
+import { APP_THROTTLERS } from './auth/throttle.decorators.js';
+import { JWT_AUDIENCE, JWT_ISSUER, MAIL_TRANSPORT } from './constants/index.js';
 import { TodosModule } from './todos/todos.module.js';
 import { UsersModule } from './users/users.module.js';
 
@@ -36,11 +34,11 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
         synchronize: false,
       }),
     }),
-    // Per-IP request limit; the login route sets a stricter one. Registered in
-    // the root module so it runs before the authentication guard.
-    ThrottlerModule.forRoot([
-      { name: 'default', ttl: minutes(1), limit: THROTTLE_DEFAULT_LIMIT },
-    ]),
+    // Per-IP request limit; auth routes set stricter per-email ones. Registered
+    // in the root module so it runs before the authentication guard. The
+    // `cooldown` throttler is skipped everywhere except on routes marked with
+    // @ThrottleEmailSends() (it only exists to space out emails).
+    ThrottlerModule.forRoot(APP_THROTTLERS),
     // JWT access tokens only (no sessions, no refresh tokens). Every route
     // requires a valid token unless marked @Public().
     AuthenticationModule.forRootAsync({
@@ -53,6 +51,21 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
           audience: JWT_AUDIENCE,
         },
         refreshToken: false,
+      }),
+    }),
+    // Verification and password-reset emails. `log` (default) prints them in
+    // the server log; set MAIL_TRANSPORT=smtp + SMTP_URL to really send them.
+    MailModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService<Env, true>) => ({
+        transport:
+          config.get('MAIL_TRANSPORT', { infer: true }) === MAIL_TRANSPORT.smtp
+            ? new SmtpTransport({
+                url: config.get('SMTP_URL', { infer: true }),
+                pool: true,
+              })
+            : new LogMailTransport(),
+        from: config.get('MAIL_FROM', { infer: true }),
       }),
     }),
     UsersModule,

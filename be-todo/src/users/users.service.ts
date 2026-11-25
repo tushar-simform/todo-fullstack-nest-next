@@ -29,12 +29,35 @@ export class UsersService {
     return this.users.findOneBy({ email: UsersService.normalizeEmail(email) });
   }
 
-  create(email: string, passwordHash: string): Promise<User> {
+  /** New accounts start unverified, unless `emailVerified` (e.g. the dev seed). */
+  create(
+    email: string,
+    passwordHash: string,
+    { emailVerified = false }: { emailVerified?: boolean } = {},
+  ): Promise<User> {
     return this.users.save(
       this.users.create({
         email: UsersService.normalizeEmail(email),
         passwordHash,
+        emailVerifiedAt: emailVerified ? new Date() : null,
       }),
     );
+  }
+
+  /** Marks the address as proven. Returns the updated user. */
+  async markEmailVerified(user: User): Promise<User> {
+    user.emailVerifiedAt ??= new Date();
+    return this.users.save(user);
+  }
+
+  /** Replaces the password. Pass `verifyEmail` when the caller just proved the address. */
+  async setPasswordHash(
+    user: User,
+    passwordHash: string,
+    { verifyEmail = false }: { verifyEmail?: boolean } = {},
+  ): Promise<User> {
+    user.passwordHash = passwordHash;
+    if (verifyEmail) user.emailVerifiedAt ??= new Date();
+    return this.users.save(user);
   }
 }

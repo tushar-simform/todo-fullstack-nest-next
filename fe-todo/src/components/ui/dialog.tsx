@@ -11,6 +11,8 @@ type DialogProps = {
   title: string;
   children: ReactNode;
   className?: string;
+  /** Center on every screen size instead of a bottom sheet on mobile. */
+  centered?: boolean;
 };
 
 /**
@@ -18,7 +20,7 @@ type DialogProps = {
  * background come from the browser. Children mount only while open, so form
  * state resets every time it opens.
  */
-export function Dialog({ open, onClose, title, children, className }: DialogProps) {
+export function Dialog({ open, onClose, title, children, className, centered }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -37,9 +39,10 @@ export function Dialog({ open, onClose, title, children, className }: DialogProp
       aria-label={title}
       className={cn(
         // Mobile: full-width bottom sheet. sm+: centered modal.
-        "mb-0 mt-auto w-full max-w-none overflow-y-auto overscroll-contain rounded-b-none rounded-t-3xl border border-border bg-surface p-0 text-foreground shadow-2xl",
-        "max-h-[92dvh] open:animate-sheet-up",
-        "sm:m-auto sm:max-w-lg sm:rounded-2xl sm:max-h-[85dvh] sm:open:animate-pop",
+        "overflow-y-auto overscroll-contain border border-border bg-surface p-0 text-foreground shadow-2xl",
+        centered
+          ? "m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl max-h-[85dvh] open:animate-pop"
+          : "mb-0 mt-auto w-full max-w-none rounded-b-none rounded-t-3xl max-h-[92dvh] open:animate-sheet-up sm:m-auto sm:max-w-lg sm:rounded-2xl sm:max-h-[85dvh] sm:open:animate-pop",
         "backdrop:bg-black/50 backdrop:backdrop-blur-sm",
         className,
       )}

@@ -106,6 +106,17 @@ export function selectOccurrences(view: TodoView, todos: Todo[], now: Date): Occ
   }
 }
 
+/** Every dated occurrence whose day falls in [from, to] (inclusive); undated todos are skipped. */
+export function selectOccurrencesBetween(todos: Todo[], from: Date, to: Date): Occurrence[] {
+  const fromKey = toDateKey(from);
+  const toKey = toDateKey(to);
+  return todos.flatMap((todo) =>
+    isRecurring(todo)
+      ? repeatBetween(todo, from, to)
+      : [onceOccurrence(todo)].filter((o) => o.dateKey !== null && o.dateKey >= fromKey && o.dateKey <= toKey),
+  );
+}
+
 /** Counts for the tab badges. */
 export function selectCounts(todos: Todo[], now: Date) {
   return {

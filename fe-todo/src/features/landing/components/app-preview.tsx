@@ -27,7 +27,7 @@ export function AppPreview() {
               <span
                 className={cn(
                   "grid size-5 shrink-0 place-items-center rounded-full border-2 text-[10px]",
-                  item.done ? "border-transparent bg-gradient-to-br from-primary to-accent text-white" : "border-border",
+                  item.done ? "border-transparent bg-gradient-to-br from-primary to-accent text-primary-foreground" : "border-border",
                 )}
               >
                 {item.done && <CheckIcon strokeWidth={3} />}

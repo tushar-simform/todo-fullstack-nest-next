@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { APP_DESCRIPTION, APP_NAME } from "@/constants";
 import { Background } from "@/components/layout/background";
+import { FlashToast } from "@/features/toast/flash-toast";
+import { ToastProvider } from "@/features/toast/toast-provider";
 import { ThemeScript } from "@/features/settings/theme-script";
 import "./globals.css";
 
@@ -43,7 +46,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="relative min-h-full font-sans">
         <Background />
-        {children}
+        <ToastProvider>
+          {children}
+          {/* useSearchParams must sit in <Suspense> (cacheComponents). */}
+          <Suspense fallback={null}>
+            <FlashToast />
+          </Suspense>
+        </ToastProvider>
       </body>
     </html>
   );

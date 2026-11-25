@@ -4,7 +4,8 @@ export const LANDING_COPY = {
   titleAccent: "own your time.",
   subtitle:
     "A beautiful todo app with due dates, repeating routines and a clear view of what is due, what is next, and what you have already done.",
-  ctaLoggedOut: "Log in",
+  ctaLoggedOut: "Create free account",
+  ctaLogIn: "Log in",
   ctaLoggedIn: "Open my todos",
   featuresHeading: "Everything you need to stay on track",
 } as const;

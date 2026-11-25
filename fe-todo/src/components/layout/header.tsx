@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { ABOUT_COPY, ROUTES } from "@/constants";
 import { cn } from "@/lib/cn";
 import { HeaderActions } from "./header-actions";
-import { Logo } from "./logo";
+import { LogoLink, LogoLinkFallback } from "./logo-link";
 
 type HeaderProps = { size?: "narrow" | "wide" };
 
@@ -16,9 +16,10 @@ export function Header({ size = "narrow" }: HeaderProps) {
           size === "wide" ? "max-w-5xl" : "max-w-2xl",
         )}
       >
-        <Link href={ROUTES.home} aria-label="Home" className="rounded-lg focus-visible:outline-2 focus-visible:outline-primary">
-          <Logo />
-        </Link>
+        {/* Reads the session cookie (signed in -> /today), so it streams in like the actions on the right. */}
+        <Suspense fallback={<LogoLinkFallback />}>
+          <LogoLink />
+        </Suspense>
         <nav className="ml-auto mr-3 sm:mr-4">
           <Link
             href={ROUTES.about}
@@ -28,7 +29,7 @@ export function Header({ size = "narrow" }: HeaderProps) {
           </Link>
         </nav>
         {/* Reads the session cookie, so it streams in; the placeholder keeps the layout stable. */}
-        <Suspense fallback={<div className="h-9 w-20" />}>
+        <Suspense fallback={<div className="h-9 w-28" />}>
           <HeaderActions />
         </Suspense>
       </div>

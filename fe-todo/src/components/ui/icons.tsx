@@ -27,6 +27,9 @@ export const PlusIcon = (p: IconProps) => (
 export const CheckIcon = (p: IconProps) => (
   <Icon {...p}><path d="m5 12.5 4.5 4.5L19 7.5" /></Icon>
 );
+export const UndoIcon = (p: IconProps) => (
+  <Icon {...p}><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3" /></Icon>
+);
 export const TrashIcon = (p: IconProps) => (
   <Icon {...p}>
     <path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3" />
@@ -95,4 +98,8 @@ export const ArrowRightIcon = (p: IconProps) => (
 
 export const MailIcon = (p: IconProps) => (
   <Icon {...p}><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></Icon>
+);
+
+export const ChartIcon = (p: IconProps) => (
+  <Icon {...p}><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></Icon>
 );
