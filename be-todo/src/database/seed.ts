@@ -13,6 +13,9 @@ import { UsersService } from '../users/users.service.js';
  * Run with `npm run seed`.
  */
 async function seed() {
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('Refusing to run the dev seed in production.');
+  }
   const app = await NestFactory.createApplicationContext(AppModule, {
     logger: ['error', 'warn'],
   });
@@ -26,7 +29,9 @@ async function seed() {
       const existing = await users.findByEmail(email);
       const user =
         existing ??
-        (await users.create(email, await hasher.hash(SEED_USER_PASSWORD)));
+        (await users.create(email, await hasher.hash(SEED_USER_PASSWORD), {
+          emailVerified: true,
+        }));
       firstUserId ??= user.id;
       console.log(`${existing ? 'exists ' : 'created'} ${user.email}`);
     }
