@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
-import { APP_DESCRIPTION, APP_NAME } from "@/constants";
+import { APP_DESCRIPTION, APP_NAME, SITE_URL } from "@/constants";
 import { Background } from "@/components/layout/background";
 import { FlashToast } from "@/features/toast/flash-toast";
 import { ToastProvider } from "@/features/toast/toast-provider";
@@ -19,11 +19,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: APP_NAME,
     template: `%s · ${APP_NAME}`,
   },
   description: APP_DESCRIPTION,
+  // The preview image comes from app/opengraph-image.png and app/twitter-image.png.
+  openGraph: {
+    type: "website",
+    siteName: APP_NAME,
+    title: APP_NAME,
+    description: APP_DESCRIPTION,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: APP_NAME,
+    description: APP_DESCRIPTION,
+  },
 };
 
 /** Lets the layout use the full screen on notched phones (safe-area insets are respected in CSS). */
